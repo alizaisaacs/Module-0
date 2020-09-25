@@ -77,8 +77,9 @@ def test_property(ls1, ls2):
     total = 0
     for i in range(len(ls1)):
         total += (ls1[i] + ls2[i])
-    assert operators.addLists(ls1, ls2) == total
-
+    # ex = operators.addLists(ls1, ls2)
+    # assert_close(operators.addLists(ls1, ls2), (operators.sum(ls1) + operators.sum(ls2)))
+    assert_close(operators.addLists(ls1, ls2), total)
 
 @pytest.mark.task0_3
 @given(lists(small_floats))

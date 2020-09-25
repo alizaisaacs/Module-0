@@ -153,10 +153,7 @@ def zipWith(fn):
 
 def addLists(ls1, ls2):
     "Add the elements of `ls1` and `ls2` using :func:`zipWith` and :func:`add`"
-    ret = zipWith(add)(ls1, ls2)
-    print(ret)
-    return ret
-    # return zipWith(add)(ls1, ls2)
+    return zipWith(add)(ls1, ls2)
 
 
 def reduce(fn, start):
