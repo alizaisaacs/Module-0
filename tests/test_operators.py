@@ -1,6 +1,6 @@
 from minitorch import operators
 from hypothesis import given
-from hypothesis.strategies import lists
+from hypothesis.strategies import lists, integers
 from .strategies import small_floats, assert_close
 import pytest
 
@@ -27,35 +27,32 @@ def test_relu(a):
 
 
 @pytest.mark.task0_2
-def test_symmetric():
+@given(integers(), integers())
+def test_symmetric(a, b):
     """
     Write a test that ensures that :func:`minitorch.operators.mul` is symmetric, i.e.
     gives the same value regardless of the order of its input.
     """
-    None
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError('Need to implement for Task 0.2')
+    assert operators.mul(a, b) == operators.mul(b, a)
 
 
 @pytest.mark.task0_2
-def test_distribute():
+@given(integers(), integers(), integers())
+def test_distribute(a, b, c):
     r"""
     Write a test that ensures that your operators distribute, i.e.
     :math:`z \times (x + y) = z \times x + z \times y`
     """
-    None
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError('Need to implement for Task 0.2')
+    assert operators.mul(a, operators.add(b, c)) == operators.add(operators.mul(a, b), operators.mul(a, c))
 
 
 @pytest.mark.task0_2
-def test_other():
+@given(integers())
+def test_other(x):
     """
     Write a test that ensures some other property holds for your functions.
     """
-    None
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError('Need to implement for Task 0.2')
+    assert operators.neg(x) == operators.mul(-1, x)
 
 
 # HIGHER ORDER
@@ -77,8 +74,10 @@ def test_property(ls1, ls2):
     Write a test that ensures that the sum of `ls1` plus the sum of `ls2`
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
-    # TODO: Implement for Task 0.3.
-    raise NotImplementedError('Need to implement for Task 0.3')
+    total = 0
+    for i in range(len(ls1)):
+        total += (ls1[i] + ls2[i])
+    assert operators.addLists(ls1, ls2) == total
 
 
 @pytest.mark.task0_3
