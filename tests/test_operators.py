@@ -74,10 +74,8 @@ def test_property(ls1, ls2):
     Write a test that ensures that the sum of `ls1` plus the sum of `ls2`
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
-    indiv_sum = (operators.sum(ls1) + operators.sum(ls2))
-    print(indiv_sum)
-    total_sum = operators.addLists(ls1, ls2)
-    print(total_sum)
+    indiv_sum = operators.add(operators.sum(ls1), operators.sum(ls2))
+    total_sum = operators.sum(operators.addLists(ls1, ls2))
     assert_close(indiv_sum, total_sum)
 
 @pytest.mark.task0_3

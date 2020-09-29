@@ -40,7 +40,20 @@ class Module:
         Returns:
             dict: Each name (key) and :class:`Parameter` (value) under this module.
         """
-        # not sure what to do here
+        dictionary = self._parameters.copy()
+        return self.recursive_named_params(dictionary, self._modules, "")
+    
+    def recursive_named_params(self, dictionary, children, prev_name):
+        if children is None:
+            return
+        for child_name, child in children.items():
+            temp = {}
+            for key in child._parameters:
+                curr_name = child_name + "." + key
+                temp[curr_name]= child._parameters[key]
+            dictionary.update(temp)
+            self.recursive_named_params(dictionary, child._modules, child_name + ".")
+        return dictionary
 
     def parameters(self):
         return self.named_parameters().values()

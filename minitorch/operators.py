@@ -157,7 +157,7 @@ def addLists(ls1, ls2):
 
 
 def reduce(fn, start):
-    r"""
+    """
     Higher-order reduce.
 
     .. image:: figs/Ops/reducelist.png
